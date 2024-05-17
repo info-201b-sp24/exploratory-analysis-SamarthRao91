@@ -179,7 +179,7 @@ This chart allows us to see if people work more/less or if there is no change as
 
 ### Insights
 
-As we can see as the experience goes up the amount hours works, but this change happens more near the end of the plot. It allows us to see how going further.
+As we can see as the experience goes up the amount hours works, but this change happens more near the end of the plot. It allows us to see how going further. Through this we could say that as a person gains more experience and goes further in the industry they work less hours correlating to a better work life balance. This also correlates to our other chart 1. Through analyizing other graphs we know that there is a correlation between age and experience, where experience increases as age does. So we can relate the graphs seeing how as experience increases and people work less correlates to people getting older and sleeping more.
 
 
 
