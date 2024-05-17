@@ -78,28 +78,50 @@ Include a table of aggregate information
 
 Describe why you included the table and what information it reveals
 
-### Chart 1
-
-Include a chart
-
-Describe why you chose this chart and what information it reveals
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart1_example.R")}
-```
-
-### Chart 2: Natural Logarithm of Wages Compared to Sleep
+### Chart 1: How a Age Relates To Hours Slept Per Day
 
 ```{r setup, include=FALSE}
 library(ggplot2)
+library(tidyverse)
+library(dplyr)
 ```
 
 ```{r data, echo=FALSE}
 sleep_data <- read.csv("sleep75.csv")
 ```
 
-```{r plot, echo=FALSE, message=FALSE, warning=FALSE}
+```{r plot1, echo=FALSE, message=FALSE, warning=FALSE}
+average_sleep_age <- sleep_data %>% 
+  group_by(age) %>% 
+  summarize(avg_sleep = mean(sleep))
+
+
+
+ggplot(average_sleep_age, aes(x = age, y =  (avg_sleep/60)/7)) + 
+  geom_line(color = "red") + 
+  labs(title = "Correlation between Age and Average Hours Slept Per Day",
+       x = "Age",
+       y = "Average Hours Slept Per Day")
+```
+
+This chart displays how the hours slept per day changes as you grow older.
+
+### Purpose
+
+There are multiple reasons we added this chart. The main question that we want to answer is the factors that impact a work life balance across multiple age groups. Through prior analysis we know that there is a correlation between age and experience. As the age of a person increases, so does their experience. So through this chart, not only can we see how different ages have different sleep preferences, but also the sleeping habits of older more experienced people.
+
+### Insights
+
+
+From the lines in the graph you can see that as the age increases, we see a increase in the number of hours slept on average. This leans us to a conclusions that shows how, as you the older, with more experience, the number of hours you sleep increases. Going back our question on hand we can see how different people in the industry have different sleep factors and habits
+
+
+
+
+### Chart 2: Natural Logarithm of Wages Compared to Sleep
+
+
+```{r plot2, echo=FALSE, message=FALSE, warning=FALSE}
 chart_2_plt <- ggplot(sleep_data, aes(x = sleep, y = lhrwage)) + 
   geom_point(alpha = 0.7) + 
   labs(title = "Natural Logarithm of Hourly Wage vs Sleep",
@@ -129,8 +151,36 @@ The purpose behind this plot is to reveal if there is any correlation between wa
 
     -   We can also see outliers at around 4200-4700 minutes of sleep range which can suggest that these individuals might have a much healthier work life balance which results in them gaining more sleep.
 
-### Chart 3
+### Chart 3 : Relationship between Experience and Total Hours Worked Per Day
 
-Include a chart
 
-Describe why you chose this chart and what information it reveals
+```{r plot3, echo=FALSE, message=FALSE, warning=FALSE}
+
+average_sleep_expr <- sleep_data %>% 
+  group_by(exper) %>% 
+  summarize(avg_sleep = mean(sleep))
+
+
+chart_3 <- ggplot(average_sleep_expr, aes(x = exper, y =   (avg_sleep/60)/7)) + 
+  geom_line(color = "blue") + 
+  labs(title = "Correlation between Exeperience and Hours Worked Per Day",
+       x = "Experiece",
+       y = "Hours Worked Per Day" )
+
+print(chart_3)
+```
+
+This chart displays how the hours slept in relation to the a person's experiece.
+  
+
+### Purpose
+
+This chart allows us to see if people work more/less or if there is no change as they get more experienced. This allows us to understand the work balance as people get older and go further in the industry. It also lets us relate the graphs through the connection between age and experience. If we understand what factors lead people to work more, sleep less, we can have an easier time remidying those changes. 
+
+### Insights
+
+As we can see as the experience goes up the amount hours works, but this change happens more near the end of the plot. It allows us to see how going further.
+
+
+
+
