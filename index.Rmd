@@ -74,21 +74,51 @@ Write a summary paragraph of findings that includes the 5 values calculated from
 
 ### Table
 
-Include a table of aggregate information
-
-Describe why you included the table and what information it reveals
-
-### Chart 1: How a Age Relates To Hours Slept Per Day
-
 ```{r setup, include=FALSE}
 library(ggplot2)
 library(tidyverse)
 library(dplyr)
+library(knitr)
 ```
 
 ```{r data, echo=FALSE}
 sleep_data <- read.csv("sleep75.csv")
 ```
+
+```{r echo=FALSE, warning=FALSE}
+table <- sleep_data %>%
+  group_by(age) %>%
+  summarize(across(c(sleep, totwrk, exper), mean, na.rm = TRUE))
+table <- table %>%
+  mutate(
+    sleep = sleep / 60 / 7,
+    totwrk = totwrk / 60 / 5
+  ) %>%
+  rename(
+    'Age' = age,
+    'Sleep (hrs/day)' = sleep,
+    'Hours Worked per Day (5 days/wk)' = totwrk,
+    'Years of Experience' = exper
+  )
+table <- round(table, 2)
+kable(table)
+```
+This table displays how much work and experience affect the amount of sleep a person will get on average. Data with the same age are calculated into a set of data that is the average of everyone in the age group.
+
+### Purpose
+
+By showing data of age, sleep, work hours, and experience side by side, we can easily see how these factors can affect someone's sleep. Now if we are interested in a certain age or range, we can easily see all of the relevant data, which allows us to efficiently explore the nuances of work-life balance.
+
+### Insights
+
+- There is a significant drop in hours work per day past the age of 60.
+  - There is also a significant increase in sleep past the age of 60.
+  - 60 seems to the age where people start to ease into retirement and take on less work hours and spend more time on their personal life.
+- The first time we see the hours worked per day drop below 4 hours is at age 62.
+- The highest hours worked per day occurs at age 37 and the surrounding ages seem to have a much higher value compared to other ages.
+  - People in their 30's and early 40's seem to be working the most amount of hours daily.
+
+### Chart 1: How a Age Relates To Hours Slept Per Day
 
 ```{r plot1, echo=FALSE, message=FALSE, warning=FALSE}
 average_sleep_age <- sleep_data %>% 
@@ -158,10 +188,10 @@ The purpose behind this plot is to reveal if there is any correlation between wa
 
 average_sleep_expr <- sleep_data %>% 
   group_by(exper) %>% 
-  summarize(avg_sleep = mean(sleep))
+  summarize(avg_sleep = mean(sleep), na.rm = TRUE)
 
 
-chart_3 <- ggplot(average_sleep_expr, aes(x = exper, y =   (avg_sleep/60)/7)) + 
+chart_3 <- ggplot(average_sleep_expr, aes(x = exper, y =   avg_sleep/60/7)) + 
   geom_line(color = "blue") + 
   labs(title = "Correlation between Exeperience and Hours Worked Per Day",
        x = "Experiece",
