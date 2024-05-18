@@ -70,7 +70,11 @@ Some of the limitations and challenges with this dataset is that, we don’t hav
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+```{r summary info, echo=FALSE, message=FALSE}
+source("summary_info.R")
+```
+
+Our analysis aims to uncover the relationships between sleep, age, work hours, experience, and earnings. We found that as age increases, the average number of hours slept per day also increases, as **`r sleep_avg` hours is the average**, but we found that people who are **65 years old sleep an average of `r sleep_avg_65` hours**, while people who are **23 years old sleep an average of `r sleep_avg_23` hours**. Given that the older people are the more they sleep, we compared how work experience affects how much someone works. We used ages 30 and 62 to observe how many hours people who have some experience work versus the number of hours people who have plentiful experience work. We found that **30 years olds have an average of `r exp_avg_30` years of experience**, while working an **average of `r work_avg_30` hours a day**. Meanwhile, we found that **62 years olds have an average of `r exp_avg_62` years of experience**, while working an **average of `r work_avg_62` hours a day**. This means that the more experience someone has (typically depends on the age of the person), the less hours they will work.
 
 ### Table
 
