@@ -192,10 +192,10 @@ The purpose behind this plot is to reveal if there is any correlation between wa
 
 average_sleep_expr <- sleep_data %>% 
   group_by(exper) %>% 
-  summarize(avg_sleep = mean(sleep), na.rm = TRUE)
+  summarize(avg_totwrk = mean(totwrk), na.rm = TRUE)
 
 
-chart_3 <- ggplot(average_sleep_expr, aes(x = exper, y =   avg_sleep/60/7)) + 
+chart_3 <- ggplot(average_sleep_expr, aes(x = exper, y =   avg_totwrk/60/5)) + 
   geom_line(color = "blue") + 
   labs(title = "Correlation between Exeperience and Hours Worked Per Day",
        x = "Experiece",
@@ -213,7 +213,7 @@ This chart allows us to see if people work more/less or if there is no change as
 
 ### Insights
 
-As we can see as the experience goes up the amount hours works also goes up, but this change happens more near the end of the plot. As a persons gains experience so does the amount of hours they work. Through this we could say that as a person gains more experience and goes further in the industry they continue to work more and have a worse work life balance. But if we use our relation to graph one it tells us a differnet story. We know that age increase there is also a increase in experience, so if we look at those with a higher age in graph 1, we notice they actually get more sleep. Despite those who are older with more experience working more, they are sleeping more, showing how they have a good work life balance.
+We see as the experience goes up the amount hours works tends to go down, but this change happens more near the end of the plot. People tend to work less as they gain more experience.  We also know that there is a relationship between age and experience through prior experiences.  As age increases so does ones experience. We can use this to relate to the first graph. Our Chart 1 tells us that as age increases so does the hours slept. That means as age goes up so does experience and people sleep and work less. This leans us to the conclusion that people who work more with more experience in their job, gain a better work life balance.
 
 
 
