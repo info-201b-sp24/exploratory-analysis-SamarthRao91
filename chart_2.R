@@ -6,4 +6,3 @@ chart_2_plt <- ggplot(sleep_data, aes(x = sleep, y = lhrwage)) +
        x = "Sleep in Minutes",
        y = "Natural Logarithmic Wage",
        color = "Health")
-print(chart_2_plt)

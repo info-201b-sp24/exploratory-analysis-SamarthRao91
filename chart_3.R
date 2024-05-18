@@ -8,10 +8,10 @@ sleep_data <- read.csv("sleep75.csv")
 
 average_sleep_expr <- sleep_data %>% 
   group_by(exper) %>% 
-  summarize(avg_sleep = mean(sleep))
+  summarize(avg_totwrk = mean(totwrk), na.rm = TRUE)
 
 
-chart <- ggplot(average_sleep_expr, aes(x = exper, y =   (avg_sleep/60)/7)) + 
+chart_3 <- ggplot(average_sleep_expr, aes(x = exper, y =   avg_totwrk/60/5)) + 
   geom_line(color = "blue") + 
   labs(title = "Correlation between Exeperience and Hours Worked Per Day",
        x = "Experiece",
